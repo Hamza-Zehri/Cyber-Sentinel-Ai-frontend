@@ -19,12 +19,14 @@ import {
   Settings2,
   ShieldAlert,
   Wifi,
+  KeyRound,
 } from "lucide-react"
 
 const navItems = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/network", label: "Network Monitor", icon: Network },
   { to: "/alerts", label: "Alerts", icon: Bell },
+  { to: "/credentials", label: "Credential Sniffer", icon: KeyRound },
   { to: "/ai-tools", label: "AI Security", icon: Bot },
   { to: "/reports", label: "Reports", icon: FileText },
   { to: "/admin", label: "Admin Panel", icon: ShieldAlert },

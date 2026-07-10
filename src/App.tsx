@@ -16,6 +16,7 @@ import Profile from "./pages/Profile"
 import AdminPanel from "./pages/AdminPanel"
 import Reports from "./pages/Reports"
 import Settings from "./pages/Settings"
+import Credentials from "./pages/Credentials"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,6 +55,7 @@ export default function App() {
               <Route path="/admin" element={<AdminPanel />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/credentials" element={<Credentials />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/dashboard" replace />} />

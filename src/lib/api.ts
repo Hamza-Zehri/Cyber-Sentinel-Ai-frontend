@@ -149,6 +149,19 @@ export interface InterfaceInfo {
   metric: number
 }
 
+export interface LoginActivity {
+  service: string
+  domain: string
+  src_ip: string
+  dst_ip: string | null
+  timestamp: string
+}
+
+export interface LoginActivityResponse {
+  total: number
+  detections: LoginActivity[]
+}
+
 export interface AuditLogEntry {
   id: string
   user_id: string | null
@@ -160,6 +173,8 @@ export interface AuditLogEntry {
   timestamp: string
   user_email: string | null
 }
+
+const API_BASE = import.meta.env.VITE_API_URL || ""
 
 export function getAccessToken(): string | null {
   return localStorage.getItem(TOKEN_KEY)
@@ -179,7 +194,7 @@ async function refreshAccessToken(): Promise<string | null> {
   const refresh = localStorage.getItem(REFRESH_KEY)
   if (!refresh) return null
   try {
-    const res = await fetch("/api/v1/auth/refresh", {
+    const res = await fetch(`${API_BASE}/api/v1/auth/refresh`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ refresh_token: refresh }),
@@ -204,13 +219,14 @@ export async function apiRequest<T>(
     headers["Content-Type"] = "application/json"
   }
 
-  let res = await fetch(path, { ...options, headers })
+  const url = `${API_BASE}${path}`
+  let res = await fetch(url, { ...options, headers })
 
   if (res.status === 401 && token) {
     const newToken = await refreshAccessToken()
     if (newToken) {
       headers["Authorization"] = `Bearer ${newToken}`
-      res = await fetch(path, { ...options, headers })
+      res = await fetch(url, { ...options, headers })
     }
   }
 
