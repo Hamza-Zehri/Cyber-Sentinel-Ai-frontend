@@ -175,7 +175,7 @@ export interface AuditLogEntry {
 }
 
 const API_BASE = import.meta.env.VITE_API_URL || (
-  import.meta.env.PROD ? "https://cyber-sentinel-api.onrender.com" : ""
+  import.meta.env.PROD ? "https://cyber-sentinel-ai-backend.onrender.com" : ""
 )
 
 export function getAccessToken(): string | null {
